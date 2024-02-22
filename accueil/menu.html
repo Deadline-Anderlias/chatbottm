@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #FF6D00;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 3px 0;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin-left: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.projet-container {
+    padding: 20px;
+}
+
+.projet {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.projet h3 {
+    margin-top: 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FF6D00;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background-color: #FF8F22;
+}
+
+@media only screen and (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+    .menu {
+        display: none;
+        position: absolute;
+        top: 50px;
+        right: 20px;
+        background-color: #FF6D00;
+        padding: 10px;
+    }
+    .menu.active {
+        display: flex;
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="menu-toggle">
+            <div class="hamburger"></div>
+            <div class="hamburger"></div>
+            <div class="hamburger"></div>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="#">Administrateurs</a></li>
+                <li><a href="#">À propos de</a></li>
+                <li><a href="#">Tutoriel</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="projet-container">
+        <h2>Projets</h2>
+        <div class="projet">
+            <h3>Projet 1</h3>
+            <a href="#" class="btn">Voir le projet</a>
+        </div>
+        <div class="projet">
+            <h3>Projet 2</h3>
+            <a href="#" class="btn">Voir le projet</a>
+        </div>
+        <div class="projet">
+            <h3>Projet 3</h3>
+            <a href="#" class="btn">Voir le projet</a>
+        </div>
+    </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const menu = document.querySelector(".menu");
+
+    menuToggle.addEventListener("click", function() {
+        menu.classList.toggle("active");
+    });
+});
+</script>
+</body>
+</html>
+  
