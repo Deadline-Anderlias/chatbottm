@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+.container {
+  margin-top: 100px;
+  text-align: center;
+}
+form {
+  display: inline-block;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+input[type="submit"] {
+  background-color: #FF6D00;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+input[type="submit"]:hover {
+  background-color: #FF8F22;
+}
+  a {
+    color: #FF8F22;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <form id="loginForm">
+    <h2>Connexion</h2>
+    <input type="text" id="email" name="email" placeholder="Email" required><br>
+    <input type="password" id="password" name="password" placeholder="Mot de passe" required><br>
+    <input type="submit" value="Se connecter">
+    <br>
+    <h6><a href="account.html">Pas encore inscrit ?</a></h6>
+  </form>
+</div>
+<script>
+document.getElementById("loginForm").addEventListener("submit", function (event) {
+  event.preventDefault(); // Prevent the default form submission
+  // Get the values from the form
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  // Check if user exists in the users.json file
+  fetch("users.json")
+  .then(response => response.json())
+  .then(data => {
+    var userExists = false;
+    for (var i = 0; i < data.users.length; i++) {
+      if (data.users[i].email === email && data.users[i].password === password) {
+        alert("Connexion réussie!");
+        userExists = true;
+        window.location.href = "menu.html"; // Redirect to menu.html on successful login
+        break;
+      }
+    }
+    if (!userExists) {
+      alert("Utilisateur non trouvé. ");
+      // Add the new user to the JSON file
+      data.users.push({
+        "email": email,
+        "password": password
+      });
+      // Write the updated JSON data back to the file
+      var jsonData = JSON.stringify(data);
+      fetch("users.json", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: jsonData
+      })
+      .then(() => alert("Compte créé avec succès!"))
+      .catch(error => console.error("Error:", error));
+    }
+  })
+  .catch(error => console.error("Error:", error));
+});
+</script>
+</body>
+  </html>
